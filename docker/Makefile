@@ -5,29 +5,45 @@ GIT_COMMIT       ?= $(shell git rev-parse HEAD)
 GIT_COMMIT_SHORT ?= $(shell git rev-parse --short HEAD)
 DOCKER_REPO      ?=	stan1y
 
-build: $(DIRS)
-	@export GIT_BRANCH=$(BRANCH_NAME) \
-			GIT_URL=$(GIT_URL) \
-			GIT_COMMIT=$(GIT_COMMIT) \
-			GIT_COMMIT_SHORT=$(GIT_COMMIT_SHORT) \
-			DOCKER_REPO=$(DOCKER_REPO); \
-		for dir in $^; do echo --- Building $$dir --- && make -C $$dir $@; done
+BASE_IMAGES	:=	node \
+				ruby \
+				python
 
-test: build $(DIRS)
+build-image: $(DIRS)
 	@export GIT_BRANCH=$(BRANCH_NAME) \
 			GIT_URL=$(GIT_URL) \
 			GIT_COMMIT=$(GIT_COMMIT) \
 			GIT_COMMIT_SHORT=$(GIT_COMMIT_SHORT) \
-			DOCKER_REPO=$(DOCKER_REPO); \
-		for dir in $^; do echo --- Testing $$dir --- && make -C $$dir $@; done
+			DOCKER_REPO=$(DOCKER_REPO) \
+			IMAGE=$(IMAGE); \
+	for dir in $^; do echo > Building $$dir/$(IMAGE) && make -C $$dir build; done
 
-publish: test $(DIRS)
+test-image: $(DIRS)
 	@export GIT_BRANCH=$(BRANCH_NAME) \
 			GIT_URL=$(GIT_URL) \
 			GIT_COMMIT=$(GIT_COMMIT) \
 			GIT_COMMIT_SHORT=$(GIT_COMMIT_SHORT) \
-			DOCKER_REPO=$(DOCKER_REPO); \
-		for dir in $^; do echo --- Publishing $$dir --- && make -C $$dir $@; done
+			DOCKER_REPO=$(DOCKER_REPO) \
+			IMAGE=$(IMAGE); \
+	for dir in $^; do echo > Testing $$dir/$(IMAGE) && make -C $$dir test; done
+
+publish-image: $(DIRS)
+	@export GIT_BRANCH=$(BRANCH_NAME) \
+			GIT_URL=$(GIT_URL) \
+			GIT_COMMIT=$(GIT_COMMIT) \
+			GIT_COMMIT_SHORT=$(GIT_COMMIT_SHORT) \
+			DOCKER_REPO=$(DOCKER_REPO) \
+			IMAGE=$(IMAGE); \
+	for dir in $^; do echo > Publishing $$dir/$(IMAGE) && make -C $$dir publish; done
+
+build:
+	@for image in $(BASE_IMAGES); do make build-image IMAGE=$$image; done
+
+test:
+	@for image in $(BASE_IMAGES); do make test-image IMAGE=$$image; done
+
+publish:
+	@for image in $(BASE_IMAGES); do make publish-image IMAGE=$$image; done
 
 .PHONY: build test publish
-.DEFAULT_GOAL:= publish
+.DEFAULT_GOAL:= test
