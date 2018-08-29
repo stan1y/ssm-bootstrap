@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 # query SSM parameters store for secrets and save files and environment variables
 
 ssm-bootstrap --environ /tmp/app_environ --root /app/

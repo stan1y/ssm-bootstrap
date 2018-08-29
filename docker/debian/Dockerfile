@@ -1,8 +1,8 @@
 ARG BASE
 FROM $BASE
 
-RUN apk update && \
-    apk add python py-pip py-yaml && \
+RUN apt-get update && \
+    apt-get install -y python python-pip python-yaml && \
     pip install awscli && \
     pip install boto3
 
