@@ -30,4 +30,4 @@ publish: test $(DIRS)
 		for dir in $^; do echo --- Publishing $$dir --- && make -C $$dir $@; done
 
 .PHONY: build test publish
-.DEFAULT_GOAL: publish
+.DEFAULT_GOAL:= publish
