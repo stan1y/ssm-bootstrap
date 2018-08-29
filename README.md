@@ -1,5 +1,5 @@
 # AWS SSM Parameter Store bootstraping for ECS Tasks
-## Secrets management for Docker containers without volume mounts.
+### Secrets management for Docker containers without volume mounts.
 
 Automatically expose your AWS SSM Parameter Store settings to ECS tasks regardless of the runtime.
 
