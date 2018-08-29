@@ -18,10 +18,10 @@ test-image:
 publish-image:
 	@echo ---- Publishing $(IMAGE) ----
 	docker tag \
-		$(REPO)/ssm-bootstrap:$(IMAGE)-alpine-$(GIT_COMMIT_SHORT) \
-		$(REPO)/ssm-bootstrap:$(IMAGE)-alpine-latest
-	docker push $(REPO)/ssm-bootstrap:$(IMAGE)-alpine-$(GIT_COMMIT_SHORT)
-	docker push $(REPO)/ssm-bootstrap:$(IMAGE)-alpine-latest
+		$(DOCKER_REPO)/ssm-bootstrap:$(IMAGE)-alpine-$(GIT_COMMIT_SHORT) \
+		$(DOCKER_REPO)/ssm-bootstrap:$(IMAGE)-alpine-latest
+	docker push $(DOCKER_REPO)/ssm-bootstrap:$(IMAGE)-alpine-$(GIT_COMMIT_SHORT)
+	docker push $(DOCKER_REPO)/ssm-bootstrap:$(IMAGE)-alpine-latest
 
 build:
 	@for image in $(BASE_IMAGES); do make build-image IMAGE=$$image; done
