@@ -8,7 +8,7 @@ See [blog post](www.endlessinsomnia.com/post/ssm-bootstrap) for usage and descri
 refer [example](tree/master/example) for how to use it in your infrastructure.
 
 
-### 1. Docker Image
+### :octocat: Build docker image
 
 Use base image with SSM bootstrap to build your service image.
 
@@ -18,7 +18,7 @@ FROM stan1y/ssm-bootstrap:node-alpine-latest
 ...
 ```
 
-### 2. ECS Task and Cluster
+### :hammer: Setup AWS ECS 
 
 Configure ECS task definition to be executed on a ECS cluster.
 
@@ -47,7 +47,7 @@ ExampleService:
         ...
 ```
 
-### 3. Parameters Store
+### :shipit: Setup AWS EC2 Parameter Store
 
 Put your configuration settings into SSM, encrypt as needed.
 
@@ -56,7 +56,7 @@ $ aws ssm put-parameter --type String --name /example-cluster/GLOBAL_VAR --value
 $ aws ssm put-parameter --type SecureString --name /example-cluster/example-service/THE_SECRET --value "Bananas"
 ```
 
-### 4. Profit
+### :unicorn: Auto-Magic
 
 Your container's environment would be populated with variables `GLOBAL_VAR` and `THE_SECRET` when
 you run your image on ECS EC2 host.
