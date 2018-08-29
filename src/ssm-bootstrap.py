@@ -112,6 +112,7 @@ def main():
         with open(os.path.join(options.root, path), 'w') as f:
             f.write(files[path])
 
+    return 0
 
 if __name__ == '__main__':
     sys.exit(main())
