@@ -7,7 +7,7 @@ RUN apt-get update && \
     pip install boto3 && \
     pip install retry
 
-COPY src/ssm-bootstrap.py src/kickstart.sh /usr/bin/
+COPY src/ssm-bootstrap src/kickstart /usr/bin/
 RUN chmod +x /usr/bin/ssm-bootstrap /usr/bin/kickstart
 
 ENTRYPOINT /usr/bin/kickstart
