@@ -7,6 +7,7 @@ import sys
 import argparse
 import boto3
 import json
+import logging
 
 
 class AppRootDirectory(argparse.Action):
@@ -115,4 +116,11 @@ def main():
     return 0
 
 if __name__ == '__main__':
+    lvl = os.environ.get('LOG_LEVEL') or 'error'
+    if lvl == 'error':
+        logging.basicConfig(level=logging.ERROR)
+    if lvl == 'info':
+        logging.basicConfig(level=logging.INFO)
+    if lvl == 'debug':
+        logging.basicConfig(level=logging.DEBUG)
     sys.exit(main())
