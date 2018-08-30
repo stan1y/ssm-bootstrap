@@ -6,7 +6,7 @@ Automatically expose your AWS SSM Parameter Store settings to ECS tasks regardle
 ## SSM Bootstrap for ECS Services
 
 See [blog post](https://endlessinsomnia.com/post/ssm-bootstrap) for usage and description and 
-refer [example](tree/master/example) for how to use it in your infrastructure.
+refer [example](example) for how to use it in your infrastructure.
 
 
 ### :octocat: Build docker image
