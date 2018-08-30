@@ -4,7 +4,8 @@ FROM $BASE
 RUN apk update && \
     apk add python py-pip py-yaml && \
     pip install awscli && \
-    pip install boto3
+    pip install boto3 && \
+    pip install retry
 
 COPY src/ssm-bootstrap.py src/kickstart.sh /usr/bin/
 RUN chmod +x /usr/bin/ssm-bootstrap /usr/bin/kickstart
