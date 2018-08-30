@@ -14,7 +14,7 @@ cluster name is **example-cluster**. You need to substitute your values for the
 commands below to configure SSM.
 
     $ aws ssm put-parameter --type SecureString \
-        --name /example-cluster/example-service/DB_CONN \
+        --name /example-cluster/example-service/environment/DB_CONN \
         --value "SERVER=example.com;SSL=true;SSLMode=require;DATABASE=mydb;UID=wikiuser;PWD=SeCrEt!"
 
 The SSM bootstrap code needs access to the ECS container metadata file. It must be enabled in the `ecs.config` on your ECS instances. The ECS tasks using SSM bootstrap must have SSM and potentially KMS functions allowed their roles. KMS access would require grants to access to encryption keys used for parameter values.
