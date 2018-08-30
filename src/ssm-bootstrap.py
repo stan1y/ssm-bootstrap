@@ -8,6 +8,8 @@ import argparse
 import boto3
 import json
 import logging
+import retry
+from botocore.exceptions import ClientError
 
 
 class AppRootDirectory(argparse.Action):
@@ -71,6 +73,7 @@ def read_parameters(ssm, names):
     return parameters
 
 
+@retry(exceptions=[ClientError], tries=10, delay=1, jitter=[1,3])
 def read_ssm(ssm, root):
     '''enumerate keys under given root and return a map of parameters'''
     describe_parameters = ssm.get_paginator('describe_parameters')
