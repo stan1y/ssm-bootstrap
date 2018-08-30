@@ -6,8 +6,7 @@ RUN apt-get update && \
     pip install awscli && \
     pip install boto3
 
-COPY src/ssm-bootstrap.py /usr/bin/ssm-bootstrap
-COPY src/kickstart.sh /usr/bin/kickstart
+COPY src/ssm-bootstrap.py src/kickstart.sh /usr/bin/
 RUN chmod +x /usr/bin/ssm-bootstrap /usr/bin/kickstart
 
 ENTRYPOINT /usr/bin/kickstart
