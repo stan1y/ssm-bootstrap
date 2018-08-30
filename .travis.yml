@@ -1,0 +1,10 @@
+sudo: required
+dist: trusty
+language: python
+services:
+  - docker
+env:
+  matrix:
+    - secure: ZO0sRyzzN/Qcofs0C/H6d9DCDWdEr+C/g/HO+YSHaxx2Jfga2IunuRBqEUqxK0LHDX3qJxiJgpYfBXZ3eSE2DDrTP5H2etqW+iDRNluzx3PfuFgEvSxWU9lhZcjW6EFUhk8VHDkTF2NEFz1oxbW3As6bsjhRZS3uItliqvh1d0gGUItF58IkF0wd/pgVma3t9c7ClFcum/AtDjeozKkbdMQ9u03hOqXYlizjBFbXk9Vr4puWwFjSFzsGZhOABe4k6dHMy1jePIcRwWI5gMDLHcYeL8qSYpAeupbjsE5LbfOit5fTP1Rk1G2+n5lq4pv37p2DeFp/dxbqpQcGPeCsHf7wKjaFyv8qVD6E/TgF18HCoOynQ3hxKdYLmJKdd7SJOumsIYla/sqcIDLGs6CbcVAV04KLdqYSEDcegDw1rl1UF6ITwBvGGtDom7Vrczhp148ll9JiI+8A+RztuatTTEBdeXIn0XpWXAgTj8Nypw6WctV25AIVurmMLG7S3y9BRINkiqxyiGVv8DgazbiDy/lvPvUWVBi4L9GK3chdiZ8s5OOtjxai9DhqT+miWox3CnbdoybBrYV84NaJ52lfDDlRRdoKCeCUm0eFhQ7/A8N/c8FbGGOfTEYxb3yfZjvhKXMkGK2PhCkSovGI4rJ8pZQG0yXyiDwBBfJgiYeMu6E=
+script:
+  - cd docker && make publish

@@ -3,8 +3,12 @@ BRANCH_NAME      ?= $(shell git rev-parse --abbrev-ref HEAD)
 GIT_URL          ?= $(shell git remote get-url origin)
 GIT_COMMIT       ?= $(shell git rev-parse HEAD)
 GIT_COMMIT_SHORT ?= $(shell git rev-parse --short HEAD)
-DOCKER_USERNAME      ?=	stan1y
 
+ifeq ($(DOCKER_USERNAME),)
+$(error DOCKER_USERNAME must be specified)
+endif
+
+# List of base images to build upon
 BASE_IMAGES	:=	node \
 				ruby \
 				python
@@ -43,6 +47,7 @@ test:
 	@for image in $(BASE_IMAGES); do make test-image IMAGE=$$image; done
 
 publish:
+	echo "$(DOCKER_PASSWORD)" | docker login -u "$(DOCKER_USERNAME)" --password-stdin
 	@for image in $(BASE_IMAGES); do make publish-image IMAGE=$$image; done
 
 .PHONY: build test publish
