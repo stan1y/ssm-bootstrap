@@ -3,7 +3,7 @@ BRANCH_NAME      ?= $(shell git rev-parse --abbrev-ref HEAD)
 GIT_URL          ?= $(shell git remote get-url origin)
 GIT_COMMIT       ?= $(shell git rev-parse HEAD)
 GIT_COMMIT_SHORT ?= $(shell git rev-parse --short HEAD)
-DOCKER_REPO      ?=	stan1y
+DOCKER_USERNAME      ?=	stan1y
 
 BASE_IMAGES	:=	node \
 				ruby \
@@ -14,7 +14,7 @@ build-image: $(DIRS)
 			GIT_URL=$(GIT_URL) \
 			GIT_COMMIT=$(GIT_COMMIT) \
 			GIT_COMMIT_SHORT=$(GIT_COMMIT_SHORT) \
-			DOCKER_REPO=$(DOCKER_REPO) \
+			DOCKER_USERNAME=$(DOCKER_USERNAME) \
 			IMAGE=$(IMAGE); \
 	for dir in $^; do echo > Building $$dir/$(IMAGE) && make -C $$dir build; done
 
@@ -23,7 +23,7 @@ test-image: $(DIRS)
 			GIT_URL=$(GIT_URL) \
 			GIT_COMMIT=$(GIT_COMMIT) \
 			GIT_COMMIT_SHORT=$(GIT_COMMIT_SHORT) \
-			DOCKER_REPO=$(DOCKER_REPO) \
+			DOCKER_USERNAME=$(DOCKER_USERNAME) \
 			IMAGE=$(IMAGE); \
 	for dir in $^; do echo > Testing $$dir/$(IMAGE) && make -C $$dir test; done
 
@@ -32,7 +32,7 @@ publish-image: $(DIRS)
 			GIT_URL=$(GIT_URL) \
 			GIT_COMMIT=$(GIT_COMMIT) \
 			GIT_COMMIT_SHORT=$(GIT_COMMIT_SHORT) \
-			DOCKER_REPO=$(DOCKER_REPO) \
+			DOCKER_USERNAME=$(DOCKER_USERNAME) \
 			IMAGE=$(IMAGE); \
 	for dir in $^; do echo > Publishing $$dir/$(IMAGE) && make -C $$dir publish; done
 
