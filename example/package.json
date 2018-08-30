@@ -1,0 +1,21 @@
+{
+    "name": "ssm-bootstrap-example",
+    "description": "Simple example of SSM bootstrap: Prints list of environment variables",
+    "version": "0.0.1",
+    "homepage": "https://github.com/stan1y/ssm-bootstrap",
+    "author": {
+        "name": "Stanislav Yudin",
+        "email": "stan@endlessinsomnia.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/stan1y/ssm-bootstrap.git"
+    },
+    "dependencies": {
+        "express": "*"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "start": "node index.js"
+      }
+  }
